@@ -3,14 +3,23 @@ import ReactDOM from 'react-dom'
 
 const name = "bert";
 
+const App = () => {
+    return(
+        <div>
+            {/* The app can be structured from different components to enforce
+            seperation of concerns */}
+            {/* <Navigation />
+            <Adminbar /> */}
+        </div>
+    )
+}
+
 //Dit component wordt opgeroepen in de AppTwo function
 const Hello = (props) => (
     <div>
         <p>Hello {props.name} from the Hello Component, you are {props.age} years old </p>
     </div>
 )
-
-
 
 const AppTwo = () => {
     
@@ -37,6 +46,15 @@ const AppTwo = () => {
                 {/* {Alle text binnen curly brackets wordt als js code geintepeteerd.} */}
                 {a} plus {b} is {a + b}
             </p>
+            <Footer name = {name}/>
+        </div>
+    )
+}
+
+const Footer = (props) => {
+    return(
+        <div>
+            this practice app has been created by {props.name}
         </div>
     )
 }
