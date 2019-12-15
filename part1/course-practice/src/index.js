@@ -2,7 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 
-//Part 1a
+//==============
+//PART 1A
+//==============
 const name = "bert";
 
 const App = () => {
@@ -74,11 +76,18 @@ let Testlet = () => (
     </React.Fragment>
 )
 
+//==============
+//PART 1B
+//==============
 
-//part 1b
+//-----------------------
+//ARRAYS
 const t = [1, -1, 3]
 
 t.push(5)
+
+//maakt een nieuwe arraylist aan en voegt hier het nummer 12 toe aan de oude lijst
+const t2 = t.concat(12)
 
 console.log(t.length) // 4 is printed
 console.log(t[1])     // -1 is printed
@@ -87,6 +96,56 @@ t.forEach(value => {
   console.log(value)  // numbers 1, -1, 3, 5 are printed, each to own line
 }) 
 
+t2.forEach(value => {
+    console.log(value)  // numbers 1, -1, 3, 5, 12 are printed, each to own line
+}) 
+
+//-----------------------
+//MAPS
+
+const a = [1, 2, 3]
+
+//multiplies te value of a by 2 and stores it in a map
+const m1 = a.map(value => value * 2)
+console.log(m1)   // [2, 4, 6] is printed
+
+const m2 = a.map(value => '<li>' + value + '</li>')
+console.log(m2)  // [ '<li>1</li>', '<li>2</li>', '<li>3</li>' ] is printed
+
+
+const b = [1, 2, 3, 4, 5, 7]
+
+const [first, second, ...rest] = b
+
+console.log(first, second)  // 1, 2 is printed
+console.log(rest)          // [3, 4 ,5] is printed
+
+//-----------------------
+//OBJECTS
+
+//An object literal is a list of zero or more pairs of property names and associated values
+//of an object, enclosed in curly braces ({}).
+
+const object1 = {
+    name: 'Arto Hellas',
+    age: 35,
+    education: 'PhD',
+  }
+  
+  const object2 = {
+    name: 'Full Stack web application development',
+    level: 'intermediate studies',
+    size: 5,
+  }
+  
+  const object3 = {
+    name: {
+      first: 'Dan',
+      last: 'Abramov',
+    },
+    grades: [2, 3, 5, 3],
+    department: 'Stanford University',
+  }
 
 // ReactDOM.render(<App />, document.getElementById('root'))
 ReactDOM.render(<Test />, document.getElementById('test'))
