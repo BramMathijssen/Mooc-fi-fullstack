@@ -2,9 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 
-//==============
-//PART 1A
-//==============
+//=================================================================
+//PART 1A                                                          |
+//=================================================================
 const name = "bert";
 
 const App = () => {
@@ -76,9 +76,9 @@ let Testlet = () => (
     </React.Fragment>
 )
 
-//==============
-//PART 1B
-//==============
+//=================================================================
+//PART 1B                                                          |
+//=================================================================
 
 //-----------------------
 //ARRAYS
@@ -145,7 +145,44 @@ const object1 = {
     },
     grades: [2, 3, 5, 3],
     department: 'Stanford University',
-  }
+}
+
+console.log(object1.name)
+const fieldName = 'age'
+console.log(object1[fieldName])
+
+object1.address = 'Breda'
+object1['secret numer'] = 12341
+
+//-----------------------
+//FUNCTIONS
+
+const sum = (p1, p2) => {
+    console.log(p1)
+    console.log(p2)
+    return p1 + p2
+}
+
+const result = sum(1 , 2)
+console.log("Het result is " + result)
+
+//als er maar 1 parameter is zijn de haakjes () niet nodig
+const square = p => {
+    console.log(p)
+    return p * p
+}
+
+//square can also be written like this:
+const squareTwo  = p => p * p
+
+//a function can also be saved under a variable
+const average = function(a,b){
+    return (a+b)/2
+}
+
+console.log("Het gemiddelde is: " + average(2,10))
+
+
 
 // ReactDOM.render(<App />, document.getElementById('root'))
 ReactDOM.render(<Test />, document.getElementById('test'))
