@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+
+//Part 1a
 const name = "bert";
 
 const App = () => {
@@ -71,6 +73,19 @@ let Testlet = () => (
         <p>Dit is een let function</p>
     </React.Fragment>
 )
+
+
+//part 1b
+const t = [1, -1, 3]
+
+t.push(5)
+
+console.log(t.length) // 4 is printed
+console.log(t[1])     // -1 is printed
+
+t.forEach(value => {
+  console.log(value)  // numbers 1, -1, 3, 5 are printed, each to own line
+}) 
 
 
 // ReactDOM.render(<App />, document.getElementById('root'))
