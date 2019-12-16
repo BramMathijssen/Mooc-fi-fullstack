@@ -18,10 +18,11 @@ const App = () => {
     }
 ]
   
+    //test commit
     return (
       <div>
           <p>{course}</p>
-            
+
 
           {/* <p>{part1.name} amount of exercises:  {part1.exercises}</p>
           <p>{part2.name} amount of exercises:  {part2.exercises}</p>
