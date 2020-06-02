@@ -8,8 +8,9 @@ import ReactDOM from 'react-dom'
 const name = "bert";
 
 const App = () => {
-    return(
+    return (
         <div>
+            <p>Hello World</p>
             {/* The app can be structured from different components to enforce
             seperation of concerns */}
             {/* <Navigation />
@@ -26,7 +27,7 @@ const Hello = (props) => (
 )
 
 const AppTwo = () => {
-    
+
     console.log('Hello from component')
     const now = new Date();
     const a = 10;
@@ -34,15 +35,15 @@ const AppTwo = () => {
     //const binnen een functie override de globale variable 
     const name = "BartelJoris"
     const age = 10
-    
+
     return (
         <div id="container">
             {/* Een naam wordt meegegeven door het props attribuut in de Hello Function */}
             <Hello name="Bert" />
             <Hello name="Henk" />
-            <Hello name= "Bertaap" />
+            <Hello name="Bertaap" />
             {/* Dynamisch vullen van het Hello component */}
-            <Hello name= {name} age= {age} />
+            <Hello name={name} age={age} />
             <p>Hello {name} with a console log element </p>
             <p>The current time is {now.toString()}</p>
             <br />
@@ -50,13 +51,13 @@ const AppTwo = () => {
                 {/* {Alle text binnen curly brackets wordt als js code geintepeteerd.} */}
                 {a} plus {b} is {a + b}
             </p>
-            <Footer name = {name}/>
+            <Footer name={name} />
         </div>
     )
 }
 
 const Footer = (props) => {
-    return(
+    return (
         <div>
             this practice app has been created by {props.name}
         </div>
@@ -93,12 +94,12 @@ console.log(t.length) // 4 is printed
 console.log(t[1])     // -1 is printed
 
 t.forEach(value => {
-  console.log(value)  // numbers 1, -1, 3, 5 are printed, each to own line
-}) 
+    console.log(value)  // numbers 1, -1, 3, 5 are printed, each to own line
+})
 
 t2.forEach(value => {
     console.log(value)  // numbers 1, -1, 3, 5, 12 are printed, each to own line
-}) 
+})
 
 //-----------------------
 //MAPS
@@ -130,18 +131,18 @@ const object1 = {
     name: 'Arto Hellas',
     age: 35,
     education: 'PhD',
-  }
-  
-  const object2 = {
+}
+
+const object2 = {
     name: 'Full Stack web application development',
     level: 'intermediate studies',
     size: 5,
-  }
-  
-  const object3 = {
+}
+
+const object3 = {
     name: {
-      first: 'Dan',
-      last: 'Abramov',
+        first: 'Dan',
+        last: 'Abramov',
     },
     grades: [2, 3, 5, 3],
     department: 'Stanford University',
@@ -163,7 +164,7 @@ const sum = (p1, p2) => {
     return p1 + p2
 }
 
-const result = sum(1 , 2)
+const result = sum(1, 2)
 console.log("Het result is " + result)
 
 //als er maar 1 parameter is zijn de haakjes () niet nodig
@@ -173,18 +174,18 @@ const square = p => {
 }
 
 //square can also be written like this:
-const squareTwo  = p => p * p
+const squareTwo = p => p * p
 
 //a function can also be saved under a variable
-const average = function(a,b){
-    return (a+b)/2
+const average = function (a, b) {
+    return (a + b) / 2
 }
 
-console.log("Het gemiddelde is: " + average(2,10))
+console.log("Het gemiddelde is: " + average(2, 10))
 
 
 
-// ReactDOM.render(<App />, document.getElementById('root'))
-ReactDOM.render(<Test />, document.getElementById('test'))
-ReactDOM.render(<Testlet />, document.getElementById('testlet'))
-ReactDOM.render(<AppTwo />, document.getElementById('apptwo'))
+ReactDOM.render(<App />, document.getElementById('root'))
+// ReactDOM.render(<Test />, document.getElementById('test'))
+// ReactDOM.render(<Testlet />, document.getElementById('testlet'))
+// ReactDOM.render(<AppTwo />, document.getElementById('apptwo'))
