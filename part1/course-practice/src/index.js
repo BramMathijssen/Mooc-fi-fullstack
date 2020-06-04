@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
 
@@ -183,9 +183,164 @@ const average = function (a, b) {
 
 console.log("Het gemiddelde is: " + average(2, 10))
 
+//=================================================================
+//PART 1C                                                          |
+//=================================================================
+
+const App1C = () => {
+    const name = 'Peter'
+    const age = 10
+
+    return (
+        <div>
+            <h1>Greetings</h1>
+            <Hello1C name="Maya" age={26 + 10} />
+            <Hello1C name={name} age={age} />
+        </div>
+    )
+}
+
+const Hello1C = ({ name, age }) => {
+    // const name = props.name
+    // const age = props.age
+
+    // const { name, age } = props
+
+    const bornYear = () => new Date().getFullYear() - age
+    
+    return (
+        <div>
+            <p>
+                Hello {name}, you are {age} years old
+        </p>
+            <p>So you were probably born in {bornYear()}</p>
+        </div>
+    )
+}
+
+//-----------------------
+//STATE
+
+const AppState = () => {
+
+    const [ counter, setCounter ] = useState(0)
+   
+   
+    setTimeout(
+      () => setCounter(counter + 1),
+      5000
+    )
+    console.log("rendering", counter);
+   
+     return (
+       <div>{counter}</div>
+     )
+   }
+
+//-----------------------
+//EVENT HANDLERS
+
+   //Set counter is executed when pressing the button with the onClick eventhandler
+   const AppCounterManual = () => {
+    const [ counter, setCounter ] = useState(0)
+  
+    return (
+      <div>
+        <div>{counter}</div>
+        <button onClick={() => setCounter(counter + 1)}>
+          plus
+        </button>
+        <button onClick={() => setCounter(0)}> 
+          zero
+        </button>
+      </div>
+    )
+  }
+
+  //The set counter functions have been stored in a seperate variable instead of 
+  //directly defining them in the event handler onClick
+  const AppManualCounterVar = () => {
+    const [ counter, setCounter ] = useState(0)
+  
+    const increaseByOne = () => setCounter(counter + 1)
+    
+    const setToZero = () => setCounter(0)
+  
+    return (
+      <div>
+        <div>{counter}</div>
+        <button onClick={increaseByOne}>
+          plus
+        </button>
+        <button onClick={setToZero}>
+          zero
+        </button>
+      </div>
+    )
+  }
+
+//---------------------------------------
+//PASSING STATE TO CHILD COMPONENTS
+
+// Component to display the counter
+const Display = (props) => {
+    return (
+      <div>{props.counter}</div>
+    )
+}
+// Destructured version of Display
+// const Display = ({ counter }) => <div>{counter}</div>
+
+// Component that contains the button Event Handler
+const Button = (props) => {
+    return (
+      <button onClick={props.handleClick}>
+        {props.text}
+      </button>
+    )
+}
+// Destructured version of Button
+// const Button = ({ handleClick, text }) => (
+//     <button onClick={handleClick}>
+//       {text}
+//     </button>
+//   )
 
 
-ReactDOM.render(<App />, document.getElementById('root'))
+
+// Display and Button have both been placed in their own child component and get
+// called in the App component
+const App = () => {
+    const [ counter, setCounter ] = useState(0)
+  
+    const increaseByOne = () => setCounter(counter + 1)
+    const decreaseByOne = () => setCounter(counter - 1)
+    const setToZero = () => setCounter(0)
+  
+    return (
+      <div>
+        <Display counter={counter}/>
+        <Button
+          handleClick={increaseByOne}
+          text='plus'
+        />
+        <Button
+          handleClick={setToZero}
+          text='zero'
+        />     
+        <Button
+          handleClick={decreaseByOne}
+          text='minus'
+        />           
+      </div>
+    )
+}
+
+
+
+  ReactDOM.render(<AppCounterManual />, document.getElementById('root'))
+//    ReactDOM.render(<AppState />, document.getElementById('root'))
+// ReactDOM.render(<App1C />, document.getElementById('root'))
 // ReactDOM.render(<Test />, document.getElementById('test'))
 // ReactDOM.render(<Testlet />, document.getElementById('testlet'))
 // ReactDOM.render(<AppTwo />, document.getElementById('apptwo'))
