@@ -207,7 +207,7 @@ const Hello1C = ({ name, age }) => {
     // const { name, age } = props
 
     const bornYear = () => new Date().getFullYear() - age
-    
+
     return (
         <div>
             <p>
@@ -223,61 +223,61 @@ const Hello1C = ({ name, age }) => {
 
 const AppState = () => {
 
-    const [ counter, setCounter ] = useState(0)
-   
-   
+    const [counter, setCounter] = useState(0)
+
+
     setTimeout(
-      () => setCounter(counter + 1),
-      5000
+        () => setCounter(counter + 1),
+        5000
     )
     console.log("rendering", counter);
-   
-     return (
-       <div>{counter}</div>
-     )
-   }
+
+    return (
+        <div>{counter}</div>
+    )
+}
 
 //-----------------------
 //EVENT HANDLERS
 
-   //Set counter is executed when pressing the button with the onClick eventhandler
-   const AppCounterManual = () => {
-    const [ counter, setCounter ] = useState(0)
-  
-    return (
-      <div>
-        <div>{counter}</div>
-        <button onClick={() => setCounter(counter + 1)}>
-          plus
-        </button>
-        <button onClick={() => setCounter(0)}> 
-          zero
-        </button>
-      </div>
-    )
-  }
+//Set counter is executed when pressing the button with the onClick eventhandler
+const AppCounterManual = () => {
+    const [counter, setCounter] = useState(0)
 
-  //The set counter functions have been stored in a seperate variable instead of 
-  //directly defining them in the event handler onClick
-  const AppManualCounterVar = () => {
-    const [ counter, setCounter ] = useState(0)
-  
-    const increaseByOne = () => setCounter(counter + 1)
-    
-    const setToZero = () => setCounter(0)
-  
     return (
-      <div>
-        <div>{counter}</div>
-        <button onClick={increaseByOne}>
-          plus
+        <div>
+            <div>{counter}</div>
+            <button onClick={() => setCounter(counter + 1)}>
+                plus
         </button>
-        <button onClick={setToZero}>
-          zero
+            <button onClick={() => setCounter(0)}>
+                zero
         </button>
-      </div>
+        </div>
     )
-  }
+}
+
+//The set counter functions have been stored in a seperate variable instead of 
+//directly defining them in the event handler onClick
+const AppManualCounterVar = () => {
+    const [counter, setCounter] = useState(0)
+
+    const increaseByOne = () => setCounter(counter + 1)
+
+    const setToZero = () => setCounter(0)
+
+    return (
+        <div>
+            <div>{counter}</div>
+            <button onClick={increaseByOne}>
+                plus
+        </button>
+            <button onClick={setToZero}>
+                zero
+        </button>
+        </div>
+    )
+}
 
 //---------------------------------------
 //PASSING STATE TO CHILD COMPONENTS
@@ -285,7 +285,7 @@ const AppState = () => {
 // Component to display the counter
 const Display = (props) => {
     return (
-      <div>{props.counter}</div>
+        <div>{props.counter}</div>
     )
 }
 // Destructured version of Display
@@ -294,9 +294,9 @@ const Display = (props) => {
 // Component that contains the button Event Handler
 const Button = (props) => {
     return (
-      <button onClick={props.handleClick}>
-        {props.text}
-      </button>
+        <button onClick={props.handleClick}>
+            {props.text}
+        </button>
     )
 }
 // Destructured version of Button
@@ -310,35 +310,259 @@ const Button = (props) => {
 
 // Display and Button have both been placed in their own child component and get
 // called in the App component
-const App = () => {
-    const [ counter, setCounter ] = useState(0)
-  
+const AppStateComplex = () => {
+    const [counter, setCounter] = useState(0)
+
     const increaseByOne = () => setCounter(counter + 1)
     const decreaseByOne = () => setCounter(counter - 1)
     const setToZero = () => setCounter(0)
+
+    return (
+        <div>
+            <Display counter={counter} />
+            <Button
+                handleClick={increaseByOne}
+                text='plus'
+            />
+            <Button
+                handleClick={setToZero}
+                text='zero'
+            />
+            <Button
+                handleClick={decreaseByOne}
+                text='minus'
+            />
+        </div>
+    )
+}
+
+//=================================================================
+//PART 1D                                                          |
+//=================================================================
+
+//---------------------------------------
+//Complex State
+
+const App1D = (props) => {
+    const [left, setLeft] = useState(0)
+    const [right, setRight] = useState(0)
+
+    return (
+        <div>
+            <div>
+                {left}
+                <button onClick={() => setLeft(left + 1)}>
+                    left
+          </button>
+                <button onClick={() => setRight(right + 1)}>
+                    right
+          </button>
+                {right}
+            </div>
+        </div>
+    )
+}
+
+// Same functionalityas App1D but we are using only 1 state 
+// of which different components make use.
+const App1DComplexState = (props) => {
+    const [clicks, setClicks] = useState({
+        left: 0, right: 0
+    })
+
+    const handleLeftClick = () => {
+        const newClicks = {
+            left: clicks.left + 1,
+            right: clicks.right
+        }
+        setClicks(newClicks)
+    }
+
+    const handleRightClick = () => {
+        const newClicks = {
+            left: clicks.left,
+            right: clicks.right + 1
+        }
+        setClicks(newClicks)
+    }
+
+    return (
+        <div>
+            <div>
+                {clicks.left}
+                <button onClick={handleLeftClick}>left</button>
+                <button onClick={handleRightClick}>right</button>
+                {clicks.right}
+            </div>
+        </div>
+    )
+}
+
+//---------------------------------------
+//Handling State Arrays
+
+const AppStateArray = (props) => {
+    const [left, setLeft] = useState(0)
+    const [right, setRight] = useState(0)
+    const [allClicks, setAll] = useState([])
+
+    const handleLeftClick = () => {
+        setAll(allClicks.concat('L'))
+        setLeft(left + 1)
+    }
+
+    const handleRightClick = () => {
+        setAll(allClicks.concat('R'))
+        setRight(right + 1)
+    }
+
+    return (
+        <div>
+            <div>
+                {left}
+                <button onClick={handleLeftClick}>left</button>
+                <button onClick={handleRightClick}>right</button>
+                {right}
+                <p>{allClicks.join(' ')}</p>
+            </div>
+        </div>
+    )
+}
+
+//---------------------------------------
+// Conditional Rendering
+
+// The behavior of this component depends on wether the button have been clicked or not.
+const History = (props) => {
+    if (props.allClicks.length === 0) {
+      return (
+        <div>
+          the app is used by pressing the buttons
+        </div>
+      )
+    }
   
     return (
       <div>
-        <Display counter={counter}/>
-        <Button
-          handleClick={increaseByOne}
-          text='plus'
-        />
-        <Button
-          handleClick={setToZero}
-          text='zero'
-        />     
-        <Button
-          handleClick={decreaseByOne}
-          text='minus'
-        />           
+        button press history: {props.allClicks.join(' ')}
+      </div>
+    )
+}
+  
+  const AppConditionalRendering = (props) => {
+    const [left, setLeft] = useState(0)
+    const [right, setRight] = useState(0)
+    const [allClicks, setAll] = useState([])
+
+    const handleLeftClick = () => {
+        setAll(allClicks.concat('L'))
+        setLeft(left + 1)
+    }
+
+    const handleRightClick = () => {
+        setAll(allClicks.concat('R'))
+        setRight(right + 1)
+    }
+  
+    return (
+      <div>
+        <div>
+          {left}
+          <button onClick={handleLeftClick}>left</button>
+          <button onClick={handleRightClick}>right</button>
+          {right}
+          <History allClicks={allClicks} />
+        </div>
+      </div>
+    )
+}
+
+  const AppEventHandlingRevisited = (props) => {
+    const [value, setValue] = useState(10)
+  
+    const shiet = () => {
+        console.log("HI");
+    }
+    return (
+      <div>
+        {value}
+        <button onClick={shiet}>reset to zero</button>
       </div>
     )
 }
 
 
+const AppFunctionInFunction = (props) => {
+    const [value, setValue] = useState(10)
+  
+    //Hello function contains a function in a function, can be written shorter
+    //as can be seen in hello2,3,4
+    const hello = (who) => {
+      const handler = () => {
+        console.log('hello', who)
+      }
+      return handler
+    }
 
-  ReactDOM.render(<AppCounterManual />, document.getElementById('root'))
+    const hello2 = (who) => {
+        return () => {
+          console.log('hello', who)
+        }
+    }
+
+    const hello3 = (who) =>
+    () => {
+        console.log('hello', who)
+    }
+
+    const hello4 = (who) => () => {
+        console.log('hello', who)
+      }
+
+  
+    return (
+      <div>
+        {value}
+        <button onClick={hello('world')}>button</button>
+        <button onClick={hello('react')}>button</button>
+        <button onClick={hello('function')}>button</button>
+      </div>
+    )
+}
+
+
+//Passing the event handler in a seperate component
+const Display = props => <div>{props.value}</div>
+
+//the event handler for the button has been placed in a seperate component here
+const Button = (props) => (
+  <button onClick={props.handleClick}>
+    {props.text}
+  </button>
+)
+
+const App = props => {
+  const [value, setValue] = useState(10)
+
+  const setToValue = newValue => {
+    setValue(newValue)
+  }
+
+  return (
+    <div>
+      <Display value={value} />
+      <Button handleClick={() => setToValue(1000)} text="thousand" />
+      <Button handleClick={() => setToValue(0)} text="reset" />
+      <Button handleClick={() => setToValue(value + 1)} text="increment" />
+    </div>
+  )
+}
+  
+
+
+
+ReactDOM.render(<AppEventHandlingRevisited />, document.getElementById('root'))
+//   ReactDOM.render(<AppCounterManual />, document.getElementById('root'))
 //    ReactDOM.render(<AppState />, document.getElementById('root'))
 // ReactDOM.render(<App1C />, document.getElementById('root'))
 // ReactDOM.render(<Test />, document.getElementById('test'))
