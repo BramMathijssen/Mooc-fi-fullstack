@@ -73,7 +73,6 @@ const App = () => {
     if (param === 1) {
       setGood(good + 1);
       setTotal(total + 1)
-      console.log("good", good);
 
     } else if (param === 2) {
       setNeutral(neutral + 1)
@@ -92,7 +91,6 @@ const App = () => {
       <Button onClick={() => increase(2)} text="neutral" />
       <Button onClick={() => increase(3)} text="bad" />
       <Statistics good={good} neutral={neutral} bad={bad} total={total} />
-      {console.log(good, neutral, bad)}
     </div>
   )
 }
