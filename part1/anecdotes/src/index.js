@@ -12,7 +12,9 @@ const Button = (props) => {
 const Anecdotes = (props) => {
   return (
     <div>
+      <h2>Anecdote of the day</h2>
       <p>{props.anecdotes}</p>
+      <DisplayVotes votes = {props.votes} />
     </div>
   )
 }
@@ -25,8 +27,27 @@ const DisplayVotes = (props) =>{
   )
 }
 
+const DisplayMostVotedAnecdote = ({votes, anecdotes}) => {
+  //1. Find the highest vote in the votes list
+  const highestVote = Math.max(...votes);
+
+  //2. Find the position in the list of this highest vote
+  const highestVoteLocation = votes.indexOf(highestVote)
+  
+  //3. Use the same position in the anecdotes list
+  const anecdoteMostVotes = anecdotes[highestVoteLocation];
+
+  //4. Display the anecdote from the position in the list
+  return(
+    <div>
+      <h2>Anecdote with the most votes</h2>
+      <p>{anecdoteMostVotes}</p>
+      <p>Amount of votes:{highestVote}</p>
+    </div>
+  )
+}
+
 const App = (props) => {
-  let randomNumber = Math.floor(Math.random() * anecdotes.length)
   const [selected, setSelected] = useState(0)
   const [votes, setVotes] = useState(Array.apply(null, new Array(anecdotes.length)).map(Number.prototype.valueOf,0))
 
@@ -35,15 +56,16 @@ const App = (props) => {
   }
 
   const addVote = () => {
-    const points = [... votes];
+    const points = [...votes];
     points[selected]++;
     setVotes(points)
   }
 
+
   return (
     <div>
-      <Anecdotes anecdotes = {anecdotes[selected]} />
-      <DisplayVotes votes = {votes[selected]} />
+      <Anecdotes anecdotes = {anecdotes[selected]} votes = {votes[selected]} />
+      <DisplayMostVotedAnecdote votes = {votes} anecdotes = {anecdotes} />
       <Button onClick={() => addVote()} text= {"Vote "} />
       <Button onClick={() => nextAnecdote()} text ={"Next Anecdote"} />
       {console.log(selected)}
