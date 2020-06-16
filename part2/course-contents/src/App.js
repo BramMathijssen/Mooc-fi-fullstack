@@ -48,7 +48,7 @@ const App = () => {
     }
   ]
 
-  const coursesMap = courses.map(course => <Course course = {course} parts = {course.parts} />)
+  const coursesMap = courses.map(course => <Course key = {course.id} course = {course} parts = {course.parts} />)
   return (
     <div>
       {coursesMap}
