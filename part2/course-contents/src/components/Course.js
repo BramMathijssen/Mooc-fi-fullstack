@@ -1,12 +1,43 @@
 import React from 'react'
-import Header from './Header'
-import Part from './Part'
 
-const Course = (props) => {
-  return (
-      <Header name={props.course.name} />
-      
-  )
+const Header = (props) => {
+    return (
+        <div>
+            <h1>{props.name}</h1>
+        </div>
+
+    )
+}
+
+const Part = ({parts}) => {
+    return (
+      <div>
+          <p>{parts.name} {parts.exercises}</p>
+      </div>
+    )
+}
+
+const Content = ({parts}) => {
+    const partsMap = parts.map(part => <li key= {part.id}>{part.name} {part.exercises}</li>)
+    return (
+      <div>
+          <ul>
+              {partsMap}
+          </ul>
+      </div>
+        
+    )
+  }
+
+const Course = ({ course }) => {
+
+    return (
+        <div>
+            <Header name={course.name} />
+            <Content parts={course.parts} />
+        </div>
+
+    )
 }
 
 export default Course
