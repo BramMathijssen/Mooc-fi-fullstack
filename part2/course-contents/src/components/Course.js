@@ -30,9 +30,8 @@ const Content = ({ parts }) => {
         <div>
             <ul>
                 {partsMap}
-
             </ul>
-            <p>total exercises: {totalExercises}</p>
+            <p><b>total exercises: {totalExercises}</b></p>
         </div>
 
     )
