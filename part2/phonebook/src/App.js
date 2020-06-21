@@ -59,25 +59,19 @@ const App = () => {
     <div>
       <h2>Phonebook</h2>
       <div>
+        
         <Filter filterInput={filterInput} handleFilterChange={handleFilterChange} />
+     
       </div>
       <h2>Add a new</h2>
+
       <PersonForm addPerson={addPerson} newName={newName} handleNameChange={handleNameChange}
         newNumber={newNumber} handleNumberChange={handleNumberChange} />
-
-      {/* <form onSubmit={addPerson} >
-        <div>
-          name: <input value={newName} onChange={handleNameChange} />
-        </div>
-        <div>
-          number: <input value={newNumber} onChange={handleNumberChange} />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form> */}
+      
       <h2>Numbers</h2>
+      
       <Persons persons={persons} filterInput={filterInput} />
+      
       <div>debug: {newName}</div>
       ...
     </div>
