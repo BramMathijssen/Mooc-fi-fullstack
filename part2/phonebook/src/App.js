@@ -57,11 +57,6 @@ const App = () => {
     setFilterInput(event.target.value)
   }
 
-  // const isFiltered = function(person) {
-  //   return person.
-  // }
-
-
   return (
     <div>
       <h2>Phonebook</h2>
