@@ -1,10 +1,34 @@
 import React from 'react';
 import CountryDetails from './CountryDetails';
 
-const Countries = ({ countries, filterInput }) => {
+const Button = (props) => {
+    return (
+        <div>
+            <button onClick={props.onClick}>{props.text}</button>
+        </div>
+    )
+}
+
+const SingleCountry = ({ country }) => {
+    return (
+        <div>
+            <CountryDetails key={country.alpha2Code} country={country} />
+        </div>
+    )
+}
+
+const Countries = ({ countries, filterInput, showSpecific, country }) => {
 
     var filteredCountries = countries.filter(country =>
         country.name.toLowerCase().includes(filterInput.toLowerCase()))
+
+    const displayCountries = () => {
+
+        console.log("display countries called");
+        filteredCountries.map(country =>
+            <CountryDetails key={country.alpha2Code} country={country} />
+        )
+    }
 
     if (filterInput === '') {
         return (
@@ -22,32 +46,21 @@ const Countries = ({ countries, filterInput }) => {
         return (
             <div>
                 {filteredCountries.map(country =>
-                    <CountryDetails key={country.alpha2Code} country={country} name={country.name} capital={country.capital} population={country.population} languages={country.languages.name} flag={country.flag} />
+                    <CountryDetails key={country.alpha2Code} country={country} />
                 )}
             </div>
         )
-    }
-
-    else {
+    } else {
         return (
             <div>{filteredCountries.map(country =>
-                <p key={country.name}>{country.name}</p>
+                <p key={country.name}>{country.name}
+                <button value={country.name} onClick={showSpecific}>show</button>
+                    {/* <Button onClick={() => displayCountries()} text={"show"} /> */}
+                </p>
             )}
             </div>
         )
     }
-    // return (
-
-
-    //     <div>
-
-    //         {/* {countries.filter(country =>
-    //             country.name.toLowerCase().includes(filterInput.toLowerCase()))
-    //             .map(country =>
-    //                 <p key={country.name}>{country.name}</p>)
-    //         } */}
-    //     </div>
-    // )
 }
 
 export default Countries
