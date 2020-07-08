@@ -1,34 +1,10 @@
 import React from 'react';
 import CountryDetails from './CountryDetails';
 
-const Button = (props) => {
-    return (
-        <div>
-            <button onClick={props.onClick}>{props.text}</button>
-        </div>
-    )
-}
-
-const SingleCountry = ({ country }) => {
-    return (
-        <div>
-            <CountryDetails key={country.alpha2Code} country={country} />
-        </div>
-    )
-}
-
-const Countries = ({ countries, filterInput, showSpecific, country }) => {
+const Countries = ({ countries, weather, filterInput, showSpecific, handleCountryChange}) => {
 
     var filteredCountries = countries.filter(country =>
         country.name.toLowerCase().includes(filterInput.toLowerCase()))
-
-    const displayCountries = () => {
-
-        console.log("display countries called");
-        filteredCountries.map(country =>
-            <CountryDetails key={country.alpha2Code} country={country} />
-        )
-    }
 
     if (filterInput === '') {
         return (
@@ -43,10 +19,14 @@ const Countries = ({ countries, filterInput, showSpecific, country }) => {
             </div>
         )
     } else if (filteredCountries.length === 1) {
+
+        //set the capital city for the weather API
+        handleCountryChange(filteredCountries[0].capital)
+
         return (
             <div>
                 {filteredCountries.map(country =>
-                    <CountryDetails key={country.alpha2Code} country={country} />
+                    <CountryDetails key={country.alpha2Code} country={country} weather={weather} />
                 )}
             </div>
         )
